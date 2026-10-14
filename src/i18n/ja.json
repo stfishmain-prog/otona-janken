@@ -28,9 +28,9 @@
   "game.net": "清算POINT",
   "game.addLossFor": "{name} の負けを1つ追加",
   "game.removeLossFor": "{name} の負けを1つ取り消す",
-  "game.settle": "清算する",
+  "game.settle": "POINT清算",
   "game.menu": "メニュー",
-  "game.editMembers": "メンバー・BET変更",
+  "game.editMembers": "SET UP",
   "settle.title": "清算結果",
   "settle.transfers": "POINTの移動",
   "settle.transfer": "{from} → {to} {amount} POINT",
@@ -48,6 +48,6 @@
   "settle.copied": "結果をコピーしました",
   "settle.copyFailed": "コピーできませんでした",
   "settle.backToGame": "ゲームに戻る",
-  "settle.newGame": "新しいゲーム",
+  "settle.newGame": "NEW GAME",
   "settle.confirmNewGame": "敗数をすべて消して新しいゲームを始めますか？"
 }
