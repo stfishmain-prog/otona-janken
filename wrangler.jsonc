@@ -1,5 +1,7 @@
 {
   "name": "otona-janken",
   "compatibility_date": "2026-10-14",
-  "assets": { "directory": "./dist" }
+  "assets": { "directory": "./dist" },
+  // main 以外のブランチのビルドは `npx wrangler preview` で配信する。このコマンドには previews ブロックが必要（空でよい）
+  "previews": {}
 }
