@@ -9,6 +9,8 @@
   "header.titleLine1": "Adultos não jogam",
   "header.titleLine2": "JANKEN à toa.",
   "footer.note": "Os PONTOS servem apenas para marcar o placar. Não há apostas em dinheiro.",
+  "footer.guide": "Como usar e FAQ",
+  "footer.privacy": "Política de Privacidade",
   "player.defaultName": "JOGADOR {n}",
   "setup.title": "CONFIGURAR",
   "setup.betAll": "APOSTA (todos)",

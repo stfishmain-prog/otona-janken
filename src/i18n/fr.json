@@ -9,6 +9,8 @@
   "header.titleLine1": "Les adultes ne jouent pas",
   "header.titleLine2": "à JANKEN pour rien.",
   "footer.note": "Les POINTS servent uniquement à compter les scores. Aucun argent n'est misé.",
+  "footer.guide": "Mode d'emploi et FAQ",
+  "footer.privacy": "Politique de confidentialité",
   "player.defaultName": "JOUEUR {n}",
   "setup.title": "CONFIGURATION",
   "setup.betAll": "MISE (pour tous)",

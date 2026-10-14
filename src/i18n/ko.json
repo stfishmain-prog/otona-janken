@@ -9,6 +9,8 @@
   "header.titleLine1": "어른은 이유 없이",
   "header.titleLine2": "가위바위보를 하지 않는다.",
   "footer.note": "포인트는 점수 집계용이며 돈을 거는 것이 아닙니다.",
+  "footer.guide": "사용법·FAQ",
+  "footer.privacy": "개인정보 처리방침",
   "player.defaultName": "플레이어 {n}",
   "setup.title": "설정",
   "setup.betAll": "베팅 포인트(일괄)",

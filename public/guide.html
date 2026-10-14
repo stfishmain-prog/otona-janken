@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>使い方・ルール・FAQ / How to use | 大人は目的無くジャンケンをしない。</title>
+    <meta name="description" content="ジャンケンなどの敗数からPOINTを清算するWebアプリ「大人は目的無くジャンケンをしない。」の使い方、POINTの計算ルール、よくある質問。" />
+    <style>
+      :root {
+        --bg: #f6f6f8;
+        --surface: #ffffff;
+        --text: #1c1b20;
+        --text-muted: #6b6875;
+        --border: #dcdae2;
+        --link: #1d5fd1;
+        color-scheme: light dark;
+        font: 16px/1.7 system-ui, -apple-system, 'Segoe UI', 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+        color: var(--text);
+        background: var(--bg);
+        -webkit-text-size-adjust: 100%;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #131318;
+          --surface: #1e1e25;
+          --text: #ececf1;
+          --text-muted: #a09dab;
+          --border: #34333d;
+          --link: #6ea2ff;
+        }
+      }
+      body { margin: 0; }
+      main { max-inline-size: 720px; margin-inline: auto; padding: 16px; }
+      section { margin-block-end: 48px; }
+      h1 { font-size: 1.5rem; line-height: 1.4; margin-block: 8px 16px; }
+      h2 { font-size: 1.125rem; margin-block: 32px 8px; padding-block-end: 4px; border-block-end: 1px solid var(--border); }
+      h3 { font-size: 1rem; margin-block: 20px 4px; }
+      p, ul, ol, dl { margin-block: 8px; }
+      ul, ol { padding-inline-start: 1.5em; }
+      dd { margin-inline-start: 0; margin-block-end: 16px; }
+      dt { font-weight: 700; }
+      a { color: var(--link); overflow-wrap: anywhere; }
+      .top { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 0.875rem; }
+      .cta { display: inline-block; margin-block: 8px; font-weight: 700; }
+      .table-wrap { overflow-x: auto; }
+      table { border-collapse: collapse; background: var(--surface); font-variant-numeric: tabular-nums; }
+      th, td { padding: 6px 12px; border: 1px solid var(--border); text-align: end; white-space: nowrap; }
+      th:first-child, td:first-child { text-align: start; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <nav class="top" aria-label="Language">
+        <a href="/">大人は目的無くジャンケンをしない。</a>
+        <a href="#ja" lang="ja">日本語</a>
+        <a href="#en" lang="en">English</a>
+        <a href="/privacy.html">プライバシーポリシー / Privacy Policy</a>
+      </nav>
+
+      <section id="ja" lang="ja">
+        <h1>使い方・ルール・FAQ</h1>
+        <p>「大人は目的無くジャンケンをしない。」は、ジャンケンなどのゲームで誰が何回負けたかを記録し、BET POINTをもとに各PLAYERの清算POINTを自動で計算するWebアプリです。最後に「誰が誰に何POINT渡せばよいか」を、できるだけ少ない受け渡し回数で表示します。登録不要・無料で、スマートフォンのブラウザからそのまま使えます。</p>
+        <a class="cta" href="/">アプリを開く</a>
+
+        <h2>使い方</h2>
+        <ol>
+          <li><strong>SET UP</strong>：PLAYERの名前を入力します（2〜20人）。BET POINTは全員に100が入っていて、一括で変えることも、PLAYERごとに変えることもできます。名前を空のままにすると「PLAYER 1」のように自動で名前が付きます。</li>
+          <li><strong>PLAY GAME</strong>：ゲームのたびに、負けた人の「負け ＋1」を押します。押し間違えたら「元に戻す」で直前の操作を取り消せます。各PLAYERのカードには敗数と現在の清算POINTが常に表示されます。</li>
+          <li><strong>POINT清算</strong>：画面下の「POINT清算」を押すと、POINTの移動（誰→誰に何POINT）と、加点・減点・端数・清算POINTの内訳が表示されます。「結果をコピー」でメッセージアプリなどに貼り付けられます。</li>
+          <li><strong>続ける・やり直す</strong>：「ゲームに戻る」で敗数を残したまま続行できます。「NEW GAME」は敗数をすべて消して最初から始めます（確認が出ます）。</li>
+        </ol>
+
+        <h2>POINTの計算ルール</h2>
+        <p>負けたPLAYERは、自分のBET POINT × 敗数 を失い（<strong>減点POINT</strong>）、その分を自分以外の全員で等分して受け取ります（<strong>加点POINT</strong>）。各PLAYERの最終的な損得が<strong>清算POINT</strong>で、全員の清算POINTを足すと必ず0になります。</p>
+        <ul>
+          <li>減点POINT ＝ BET POINT × 敗数 × −1</li>
+          <li>加点POINT ＝ 他のPLAYERそれぞれの「BET POINT × 敗数 ÷（人数 − 1）」の合計（小数は切り捨て）</li>
+          <li>端数POINT ＝ 割り切れずに配られなかった余り。負けたPLAYER自身の手元に残ります</li>
+          <li>清算POINT ＝ 加点POINT ＋ 減点POINT ＋ 端数POINT</li>
+        </ul>
+
+        <h3>例：3人・BET POINT 100</h3>
+        <p>Aが2敗、Bが1敗、Cが0敗の場合。Aの減点200は、BとCに100ずつ配られます。Bの減点100は、AとCに50ずつ配られます。</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>PLAYER</th><th>敗数</th><th>加点</th><th>減点</th><th>端数</th><th>清算POINT</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>A</td><td>2</td><td>50</td><td>−200</td><td>0</td><td>−150</td></tr>
+              <tr><td>B</td><td>1</td><td>100</td><td>−100</td><td>0</td><td>0</td></tr>
+              <tr><td>C</td><td>0</td><td>150</td><td>0</td><td>0</td><td>+150</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>清算の結果は「A → C 150 POINT」の1回だけです。</p>
+
+        <h3>端数の例：7人・BET POINT 500</h3>
+        <p>1人が1回負けると、減点500を他の6人で分けます。500 ÷ 6 は割り切れないので、6人には83ずつ（計498）を配り、余りの2は負けたPLAYERの端数POINTとして残ります。負けたPLAYERの清算POINTは −500 ＋ 2 ＝ −498 で、全員の合計は0のままです。</p>
+        <p>端数は1ゲームごとではなく、敗数の合計でまとめて計算します。同じ人が3回負けた場合は 1,500 ÷ 6 ＝ 250 で割り切れるので、端数は出ません。</p>
+
+        <h2>よくある質問</h2>
+        <dl>
+          <dt>入力したデータはどこに保存されますか？</dt>
+          <dd>お使いのブラウザ（端末）の中にだけ保存され、サーバーには送信されません。ページを閉じても、同じ端末・同じブラウザで開けば続きから使えます。詳しくは<a href="/privacy.html">プライバシーポリシー</a>をご覧ください。</dd>
+
+          <dt>お金を賭けるためのアプリですか？</dt>
+          <dd>いいえ。POINTは得点を集計するためのもので、金銭を賭けるものではありません。</dd>
+
+          <dt>ジャンケン以外にも使えますか？</dt>
+          <dd>はい。「1回ごとに負けた人が1人決まる」ゲームなら、トランプやボードゲームなど何にでも使えます。</dd>
+
+          <dt>何人まで使えますか？</dt>
+          <dd>2人から20人までです。</dd>
+
+          <dt>途中で人数やBET POINTを変えられますか？</dt>
+          <dd>はい。メニューの「SET UP」から変更できます。敗数の記録は残り、清算POINTは全履歴から計算し直されます。</dd>
+
+          <dt>「負け ＋1」を押し間違えました。</dt>
+          <dd>「元に戻す」で直前の操作を取り消せます。特定のPLAYERの負けを1つ減らす「取消」ボタンもあります。</dd>
+
+          <dt>端数POINTとは何ですか？</dt>
+          <dd>減点を他のPLAYERに等分したときに割り切れずに残った分です。誰にも配らず、負けたPLAYER自身の手元に残すため、全員の清算POINTの合計は常に0になります。</dd>
+
+          <dt>他の端末と共有できますか？</dt>
+          <dd>データは端末内にだけ保存されるため、端末間の同期はできません。清算結果は「結果をコピー」で共有してください。</dd>
+
+          <dt>料金はかかりますか？</dt>
+          <dd>無料です。会員登録もありません。運営のため広告を表示することがあります。</dd>
+        </dl>
+      </section>
+
+      <section id="en" lang="en">
+        <h1>How to use, rules and FAQ</h1>
+        <p>"Otona wa Mokuteki Naku Janken wo Shinai." is a web app that records who lost how many times in rock-paper-scissors or any other game, and calculates each player's net POINT from their BET POINT. At the end it shows who should give how many POINTs to whom, with as few transfers as possible. It is free, needs no sign-up, and runs right in your phone's browser.</p>
+        <a class="cta" href="/">Open the app</a>
+
+        <h2>How to use</h2>
+        <ol>
+          <li><strong>SET UP</strong>: Enter the players' names (2 to 20 players). Every player starts with a BET POINT of 100, which you can change for everyone at once or for each player. Empty names are filled in automatically, such as "PLAYER 1".</li>
+          <li><strong>PLAY GAME</strong>: After each game, tap "Loss +1" for the player who lost. If you tap the wrong one, "Undo" reverts the last action. Each player's card always shows their losses and current net POINT.</li>
+          <li><strong>Settle POINT</strong>: Tap "Settle POINT" at the bottom to see the POINT transfers (who gives how many POINTs to whom) and the breakdown of gain, loss, remainder and net POINT. "Copy results" lets you paste them into a messaging app.</li>
+          <li><strong>Continue or restart</strong>: "Back to game" continues with the losses kept. "NEW GAME" clears all losses and starts over (you will be asked to confirm).</li>
+        </ol>
+
+        <h2>How POINTs are calculated</h2>
+        <p>A player who loses gives up their BET POINT × losses (<strong>Loss</strong>), which is split equally among all the other players (<strong>Gain</strong>). Each player's overall result is their <strong>Net POINT</strong>, and the Net POINTs of all players always add up to 0.</p>
+        <ul>
+          <li>Loss = BET POINT × losses × −1</li>
+          <li>Gain = the sum, over every other player, of "their BET POINT × their losses ÷ (players − 1)", rounded down</li>
+          <li>Remainder = the part that could not be split evenly. It stays with the player who lost</li>
+          <li>Net POINT = Gain + Loss + Remainder</li>
+        </ul>
+
+        <h3>Example: 3 players, BET POINT 100</h3>
+        <p>A lost twice, B once and C never. A's loss of 200 goes to B and C, 100 each. B's loss of 100 goes to A and C, 50 each.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>PLAYER</th><th>Losses</th><th>Gain</th><th>Loss</th><th>Remainder</th><th>Net POINT</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>A</td><td>2</td><td>50</td><td>−200</td><td>0</td><td>−150</td></tr>
+              <tr><td>B</td><td>1</td><td>100</td><td>−100</td><td>0</td><td>0</td></tr>
+              <tr><td>C</td><td>0</td><td>150</td><td>0</td><td>0</td><td>+150</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>The settlement is a single transfer: A → C 150 POINT.</p>
+
+        <h3>Remainder example: 7 players, BET POINT 500</h3>
+        <p>When one player loses once, their loss of 500 is split among the other 6. Since 500 ÷ 6 does not divide evenly, each of the 6 gets 83 (498 in total) and the remaining 2 stays with the loser as their Remainder. The loser's Net POINT is −500 + 2 = −498, and the total for all players is still 0.</p>
+        <p>Remainders are calculated from the total losses, not game by game. If the same player loses 3 times, 1,500 ÷ 6 = 250 divides evenly, so there is no remainder.</p>
+
+        <h2>FAQ</h2>
+        <dl>
+          <dt>Where is my data stored?</dt>
+          <dd>Only in your browser on your device. It is never sent to a server. If you close the page, you can pick up where you left off in the same browser on the same device. See the <a href="/privacy.html#en">Privacy Policy</a> for details.</dd>
+
+          <dt>Is this app for gambling?</dt>
+          <dd>No. POINTs are only for keeping score. No money is wagered.</dd>
+
+          <dt>Can I use it for games other than rock-paper-scissors?</dt>
+          <dd>Yes. It works for any game where one player loses each round, such as card games or board games.</dd>
+
+          <dt>How many players are supported?</dt>
+          <dd>From 2 to 20 players.</dd>
+
+          <dt>Can I change the players or BET POINTs in the middle?</dt>
+          <dd>Yes, from "SET UP" in the menu. The loss records are kept, and the Net POINTs are recalculated from the full history.</dd>
+
+          <dt>I tapped "Loss +1" by mistake.</dt>
+          <dd>"Undo" reverts the last action. Each player also has an "Undo loss" button that removes one of their losses.</dd>
+
+          <dt>What is the Remainder?</dt>
+          <dd>The part of a loss that could not be split evenly among the other players. It is not given to anyone and stays with the player who lost, so the Net POINTs of all players always add up to 0.</dd>
+
+          <dt>Can I share data with another device?</dt>
+          <dd>No. Data is stored only on your device, so it cannot be synced. Use "Copy results" to share the settlement.</dd>
+
+          <dt>Does it cost anything?</dt>
+          <dd>It is free and requires no sign-up. Ads may be shown to support the Site.</dd>
+        </dl>
+      </section>
+    </main>
+  </body>
+</html>

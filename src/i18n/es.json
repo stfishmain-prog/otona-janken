@@ -9,6 +9,8 @@
   "header.titleLine1": "Los adultos no juegan",
   "header.titleLine2": "JANKEN porque sí.",
   "footer.note": "Los PUNTOS solo sirven para llevar la cuenta. No se apuesta dinero.",
+  "footer.guide": "Cómo usar y preguntas frecuentes",
+  "footer.privacy": "Política de privacidad",
   "player.defaultName": "JUGADOR {n}",
   "setup.title": "CONFIGURAR",
   "setup.betAll": "APUESTA (todos)",

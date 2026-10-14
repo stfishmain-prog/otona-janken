@@ -9,6 +9,8 @@
   "header.titleLine1": "Grown-ups Don't Play",
   "header.titleLine2": "JANKEN for Nothing.",
   "footer.note": "POINTs are only for keeping score. No money is wagered.",
+  "footer.guide": "How to use & FAQ",
+  "footer.privacy": "Privacy Policy",
   "player.defaultName": "PLAYER {n}",
   "setup.title": "SET UP",
   "setup.betAll": "BET POINT (all players)",

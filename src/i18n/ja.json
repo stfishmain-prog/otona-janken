@@ -9,6 +9,8 @@
   "header.titleLine1": "大人は目的無く",
   "header.titleLine2": "ジャンケンをしない。",
   "footer.note": "POINTは得点を集計するためのもので、金銭を賭けるものではありません。",
+  "footer.guide": "使い方・FAQ",
+  "footer.privacy": "プライバシーポリシー",
   "player.defaultName": "PLAYER {n}",
   "setup.title": "SET UP",
   "setup.betAll": "BET POINT（一括）",

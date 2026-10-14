@@ -9,6 +9,8 @@
   "header.titleLine1": "Erwachsene spielen",
   "header.titleLine2": "nicht grundlos JANKEN.",
   "footer.note": "PUNKTE dienen nur zum Zählen. Es wird nicht um Geld gespielt.",
+  "footer.guide": "Anleitung & FAQ",
+  "footer.privacy": "Datenschutzerklärung",
   "player.defaultName": "SPIELER {n}",
   "setup.title": "EINRICHTEN",
   "setup.betAll": "EINSATZ (für alle)",

@@ -9,6 +9,8 @@
   "header.titleLine1": "大人不会",
   "header.titleLine2": "无缘无故猜拳。",
   "footer.note": "点数仅用于计分，不涉及金钱下注。",
+  "footer.guide": "使用方法与常见问题",
+  "footer.privacy": "隐私政策",
   "player.defaultName": "玩家 {n}",
   "setup.title": "设置",
   "setup.betAll": "下注点数（全员）",
