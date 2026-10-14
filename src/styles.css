@@ -532,6 +532,7 @@ select {
 }
 
 .site-header__lang {
+  margin-inline-start: auto;
   min-block-size: 40px;
   padding-inline: 8px;
   border: 1px solid var(--border);
