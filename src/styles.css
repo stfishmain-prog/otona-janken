@@ -484,6 +484,7 @@ select {
 .site-header {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   justify-content: space-between;
   gap: var(--gap);
   inline-size: 100%;
@@ -493,14 +494,33 @@ select {
   padding-block: 12px 0;
 }
 
-/* 中身が無いページ（清算結果）では余白も出さない */
+/* 中身が無いページ（ゲーム・清算結果）では余白も出さない */
 .site-header:empty {
   display: none;
 }
 
+/* アプリ名（S1のみ）。スマホ縦で2行に折り返しても文節で切れるようにする */
 .site-header__title {
-  font-size: 0.9375rem;
-  font-weight: 700;
+  flex: 1 1 100%;
+  padding-block: var(--gap) 0;
+  font-size: clamp(1.5rem, 6vw, 2rem);
+  font-weight: 800;
+  line-height: 1.35;
+  letter-spacing: 0.02em;
+  text-align: center;
+  text-wrap: balance;
+  word-break: auto-phrase;
+}
+
+.site-header__title::after {
+  content: '';
+  display: block;
+  inline-size: 48px;
+  block-size: 4px;
+  margin-block-start: var(--gap);
+  margin-inline: auto;
+  border-radius: 999px;
+  background: var(--pop-1);
 }
 
 .site-header__lang {

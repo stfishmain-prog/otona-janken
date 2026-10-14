@@ -13,8 +13,8 @@ export default function App() {
   const Screen = screens[state.view];
   return (
     <div className="app">
-      {/* 清算結果ではアプリ名を出さない */}
-      <Header showTitle={state.view !== 'settle'} />
+      {/* アプリ名はセットアップ画面だけに出す */}
+      <Header showTitle={state.view === 'setup'} />
       <Screen state={state} dispatch={dispatch} />
       <Footer />
     </div>

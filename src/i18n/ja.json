@@ -17,7 +17,7 @@
   "setup.removePlayer": "削除",
   "setup.confirmRemove": "{name} を削除しますか？敗数の記録も消えます。",
   "setup.start": "ゲーム開始",
-  "game.title": "ゲーム",
+  "game.title": "PLAY GAME",
   "game.addLoss": "負け ＋1",
   "game.removeLoss": "取消",
   "game.undo": "元に戻す",
