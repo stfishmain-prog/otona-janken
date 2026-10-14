@@ -499,7 +499,7 @@ select {
   display: none;
 }
 
-/* アプリ名（S1のみ）。スマホ縦で2行に折り返しても文節で切れるようにする */
+/* アプリ名（S1のみ）。スマホ縦では2つの span の間だけで折り返す */
 .site-header__title {
   flex: 1 1 100%;
   padding-block: var(--gap) 0;
@@ -508,8 +508,10 @@ select {
   line-height: 1.35;
   letter-spacing: 0.02em;
   text-align: center;
-  text-wrap: balance;
-  word-break: auto-phrase;
+}
+
+.site-header__title > span {
+  display: inline-block;
 }
 
 .site-header__title::after {
