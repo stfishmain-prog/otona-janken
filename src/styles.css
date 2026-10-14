@@ -70,12 +70,15 @@ body {
   min-block-size: 100svh;
 }
 
-h2 {
+h1,
+h2,
+h3 {
   margin: 0;
 }
 
 button,
-input {
+input,
+select {
   font: inherit;
   color: inherit;
 }
@@ -86,11 +89,27 @@ input {
 }
 
 /* ===== 画面 ===== */
+.app {
+  min-block-size: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app > main {
+  flex: 1;
+  inline-size: 100%;
+}
+
+/* 固定ボタンの下にフッターが隠れないよう、ページ末尾にその高さを空ける */
+.app:has(.action-bar) {
+  padding-block-end: calc(var(--bar-h) + env(safe-area-inset-bottom));
+}
+
 .screen {
   max-inline-size: var(--max-w);
   margin-inline: auto;
   padding-inline: var(--pad);
-  padding-block: var(--pad) calc(var(--bar-h) + env(safe-area-inset-bottom) + var(--pad));
+  padding-block: var(--pad);
   display: flex;
   flex-direction: column;
   gap: var(--gap);
@@ -347,6 +366,193 @@ input {
   font-size: 1.0625rem;
 }
 
+/* ===== S3 清算結果 ===== */
+.settle-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: var(--pad);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.settle-section__title {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.transfers {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.transfer + .transfer {
+  border-block-start: 1px solid var(--border);
+}
+
+.transfer__visual {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 8px;
+  padding-block: 10px;
+}
+
+.transfer__name {
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.transfer__arrow {
+  color: var(--text-muted);
+}
+
+.transfer__amount {
+  margin-inline-start: auto;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.settle-empty {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.table-wrap {
+  overflow-x: auto;
+  margin-inline: calc(-1 * var(--pad));
+  padding-inline: var(--pad);
+}
+
+.result-table {
+  inline-size: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.result-table :is(th, td) {
+  padding: 8px 4px;
+  border-block-end: 1px solid var(--border);
+  text-align: end;
+}
+
+.result-table :is(thead th, tbody th, tfoot th) {
+  text-align: start;
+}
+
+.result-table thead th {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.result-table tbody th {
+  max-inline-size: 5.5em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.result-table tfoot :is(th, td) {
+  border-block-end: 0;
+  color: var(--text-muted);
+}
+
+.result-table .net {
+  font-size: inherit;
+}
+
+.settle-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.settle-actions__status {
+  margin: 0;
+  min-block-size: 1.5em; /* 表示時に下のボタンがずれないよう高さを確保 */
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+/* ===== 共通ヘッダー・フッター ===== */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap);
+  inline-size: 100%;
+  max-inline-size: var(--max-w);
+  margin-inline: auto;
+  padding-inline: var(--pad);
+  padding-block: 12px 0;
+}
+
+/* 中身が無いページ（清算結果）では余白も出さない */
+.site-header:empty {
+  display: none;
+}
+
+.site-header__title {
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+.site-header__lang {
+  min-block-size: 40px;
+  padding-inline: 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.site-footer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  inline-size: 100%;
+  max-inline-size: var(--max-w);
+  margin-inline: auto;
+  padding: var(--pad);
+  border-block-start: 1px solid var(--border);
+}
+
+.site-footer__note {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+/* 広告枠は高さを固定で確保し、表示時に画面がずれないようにする（design.md 9章） */
+.ad-slot {
+  inline-size: 100%;
+}
+
+.ad-slot--footer {
+  block-size: 100px;
+}
+
+.ad-slot--settle {
+  block-size: 250px;
+}
+
+.visually-hidden {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* ===== 画面下部の固定ボタン ===== */
 .action-bar {
   position: fixed;
@@ -365,12 +571,12 @@ input {
   margin-inline: auto;
 }
 
-/* ===== S1・S2 の彩り ===== */
-body:has(:is(.screen--setup, .screen--game)) {
+/* ===== S1・S2・S3 の彩り ===== */
+body:has(:is(.screen--setup, .screen--game, .screen--settle)) {
   background: var(--game-bg);
 }
 
-:is(.screen--setup, .screen--game) .screen__title {
+:is(.screen--setup, .screen--game, .screen--settle) .screen__title {
   font-size: 1.5rem;
   font-weight: 800;
 }
@@ -470,6 +676,62 @@ body:has(:is(.screen--setup, .screen--game)) {
   color: var(--accent);
 }
 
+/* --- S3 --- */
+/* PLAYER の色は表示順で決まるので、S1・S2 と同じ色になる */
+.accent-1 { --accent: var(--pop-1); }
+.accent-2 { --accent: var(--pop-2); }
+.accent-3 { --accent: var(--pop-3); }
+.accent-4 { --accent: var(--pop-4); }
+.accent-5 { --accent: var(--pop-5); }
+.accent-6 { --accent: var(--pop-6); }
+
+.screen--settle .settle-section {
+  border-color: color-mix(in srgb, var(--pop-1) 30%, var(--border));
+  background: color-mix(in srgb, var(--pop-1) 5%, var(--surface));
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--pop-1) 12%, transparent);
+}
+
+.screen--settle .settle-section__title {
+  color: var(--pop-1);
+}
+
+.screen--settle .transfer__name {
+  color: var(--accent);
+}
+
+.screen--settle .transfer__amount {
+  padding: 2px 12px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--pop-1) 14%, var(--surface));
+  color: var(--pop-1);
+}
+
+.screen--settle .result-table tbody th {
+  border-inline-start: 4px solid var(--accent);
+  padding-inline-start: 8px;
+  color: var(--accent);
+}
+
+.screen--settle .settle-actions > .btn--primary {
+  background: var(--pop-1);
+  color: #ffffff;
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--pop-1) 30%, transparent);
+}
+
+.screen--settle .settle-actions > .btn--outline {
+  border: 2px solid color-mix(in srgb, var(--pop-1) 55%, var(--border));
+  color: var(--pop-1);
+  font-weight: 700;
+}
+
+/* 「新しいゲーム」は敗数を消す操作なので、オレンジの2つとは別の色・位置で区別する */
+.screen--settle .settle-actions__new {
+  margin-block-start: var(--gap);
+  background: var(--primary);
+  color: var(--primary-text);
+  font-weight: 700;
+}
+
 /* --- 下部の固定ボタン --- */
 :is(.screen--setup, .screen--game) .action-bar {
   border-block-start: 0;
@@ -485,14 +747,19 @@ body:has(:is(.screen--setup, .screen--game)) {
 
 @media (prefers-color-scheme: dark) {
   .screen--game .card__name,
-  .screen--game .card__minus {
+  .screen--game .card__minus,
+  .screen--settle .transfer__name,
+  .screen--settle .result-table tbody th {
     color: color-mix(in srgb, var(--accent) 65%, #ffffff);
   }
 
   .screen--setup .field__label,
   .screen--setup .player-list + .btn--outline,
   .screen--setup .player-list__head > :last-child,
-  .screen--game .game-bar__total {
+  .screen--game .game-bar__total,
+  .screen--settle .settle-section__title,
+  .screen--settle .transfer__amount,
+  .screen--settle .settle-actions > .btn--outline {
     color: color-mix(in srgb, var(--pop-1) 65%, #ffffff);
   }
 }
