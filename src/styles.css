@@ -514,6 +514,18 @@ select {
   display: inline-block;
 }
 
+/* スマホ幅では必ず2行にする */
+@media (max-width: 519px) {
+  .site-header__title > span {
+    display: block;
+  }
+}
+
+/* 末尾の全角「。」は右側が空白なので、その1文字分を中央揃えの計算から外す */
+:lang(ja) .site-header__title > span:last-child {
+  margin-inline-end: -1em;
+}
+
 .site-header__title::after {
   content: '';
   display: block;
