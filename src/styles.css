@@ -27,7 +27,6 @@
   --gap: 12px;
   --pad: 16px;
   --tap: 48px;      /* タップ領域の最小高さ */
-  --bar-h: calc(var(--tap) + 2 * var(--pad));
   --max-w: 560px;
 
   --sans: system-ui, -apple-system, 'Segoe UI', 'Hiragino Sans', 'Noto Sans JP', sans-serif;
@@ -98,11 +97,6 @@ select {
 .app > main {
   flex: 1;
   inline-size: 100%;
-}
-
-/* 固定ボタンの下にフッターが隠れないよう、ページ末尾にその高さを空ける */
-.app:has(.action-bar) {
-  padding-block-end: calc(var(--bar-h) + env(safe-area-inset-bottom));
 }
 
 .screen {
@@ -588,11 +582,13 @@ select {
 }
 
 /* ===== 画面下部の固定ボタン ===== */
+/* スクロール中は画面下に残り、ページ末尾ではフッター（注意書き）の上に収まる */
 .action-bar {
-  position: fixed;
-  inset-inline: 0;
+  position: sticky;
   inset-block-end: 0;
   z-index: 5;
+  margin-block-start: auto;
+  margin-inline: calc(-1 * var(--pad));
   padding: var(--pad);
   padding-block-end: calc(var(--pad) + env(safe-area-inset-bottom));
   border-block-start: 1px solid var(--border);
