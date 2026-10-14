@@ -1,5 +1,16 @@
 import { useCallback, useSyncExternalStore } from 'react';
+import de from './de.json';
+import en from './en.json';
+import es from './es.json';
+import fr from './fr.json';
+import it from './it.json';
 import ja from './ja.json';
+import ko from './ko.json';
+import nl from './nl.json';
+import pt from './pt.json';
+import zhCN from './zh-CN.json';
+import zhHK from './zh-HK.json';
+import zhTW from './zh-TW.json';
 
 export type MessageKey = keyof typeof ja;
 type Dict = Partial<Record<MessageKey, string>>;
@@ -8,6 +19,17 @@ type Vars = Record<string, string | number>;
 // 言語の追加は「JSONファイル1つ追加＋ここに1行」（design.md 8章）
 const dictionaries = {
   ja,
+  en: en satisfies Record<MessageKey, string>,
+  'zh-TW': zhTW satisfies Record<MessageKey, string>,
+  'zh-HK': zhHK satisfies Record<MessageKey, string>,
+  'zh-CN': zhCN satisfies Record<MessageKey, string>,
+  ko: ko satisfies Record<MessageKey, string>,
+  pt: pt satisfies Record<MessageKey, string>,
+  de: de satisfies Record<MessageKey, string>,
+  fr: fr satisfies Record<MessageKey, string>,
+  es: es satisfies Record<MessageKey, string>,
+  it: it satisfies Record<MessageKey, string>,
+  nl: nl satisfies Record<MessageKey, string>,
 } satisfies Record<string, Dict>;
 
 export type Lang = keyof typeof dictionaries;
@@ -20,6 +42,24 @@ const isLang = (v: unknown): v is Lang => typeof v === 'string' && Object.hasOwn
 
 export const languages = Object.keys(dictionaries) as Lang[];
 
+// ブラウザの言語タグを辞書に対応付ける。地域付き（zh-TW 等）→ 中国語は字体で判定 → 言語のみ
+function matchLang(tag: string): Lang | undefined {
+  let locale: Intl.Locale;
+  try {
+    locale = new Intl.Locale(tag).maximize(); // zh → zh-Hans-CN, zh-Hant → zh-Hant-TW
+  } catch {
+    return undefined;
+  }
+  const { language, script, region } = locale;
+  const regional = `${language}-${region}`;
+  if (isLang(regional)) return regional;
+  if (language === 'zh') {
+    if (script === 'Hant') return region === 'MO' ? 'zh-HK' : 'zh-TW';
+    return 'zh-CN'; // 簡体字（zh-SG 等）
+  }
+  return isLang(language) ? language : undefined;
+}
+
 // 保存済み設定 → ブラウザの言語 → 日本語
 function detectLang(): Lang {
   try {
@@ -30,8 +70,8 @@ function detectLang(): Lang {
   }
   if (typeof navigator !== 'undefined') {
     for (const tag of navigator.languages ?? [navigator.language]) {
-      const base = tag?.toLowerCase().split('-')[0];
-      if (isLang(base)) return base;
+      const lang = tag ? matchLang(tag) : undefined;
+      if (lang) return lang;
     }
   }
   return DEFAULT_LANG;
@@ -58,6 +98,11 @@ const translate = (lang: Lang, key: MessageKey, vars?: Vars) => interpolate(look
 
 export function t(key: MessageKey, vars?: Vars): string {
   return translate(current, key, vars);
+}
+
+// 言語名はその言語自身の辞書から取る（例: 日本語, English）
+export function languageName(lang: Lang): string {
+  return translate(lang, 'header.langName');
 }
 
 export function formatNumber(n: number, lang: Lang = current): string {

@@ -532,6 +532,7 @@ select {
 }
 
 .site-header__lang {
+  margin-inline-start: auto;
   min-block-size: 40px;
   padding-inline: 8px;
   border: 1px solid var(--border);
@@ -567,6 +568,32 @@ select {
 
 .ad-slot--settle {
   block-size: 250px;
+}
+
+.ad-slot__ins {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: hidden;
+}
+
+.site-footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.875rem;
+}
+
+.site-footer__links a {
+  color: var(--text-muted);
+}
+
+.site-footer__links a:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
 }
 
 .visually-hidden {
