@@ -1,0 +1,504 @@
+/* ===== トークン ===== */
+:root {
+  --bg: #f6f6f8;
+  --surface: #ffffff;
+  --text: #1c1b20;
+  --text-muted: #6b6875;
+  --border: #dcdae2;
+  --primary: #2b2a33;
+  --primary-text: #ffffff;
+  --plus: #1d5fd1;  /* 清算POINT 正 */
+  --minus: #c8262d; /* 清算POINT 負 */
+  --focus: #1d5fd1;
+
+  /* ゲーム画面の彩り。清算POINTの青・赤と紛れない色だけを使う */
+  --pop-1: #e8590c; /* オレンジ */
+  --pop-2: #7c3aed; /* パープル */
+  --pop-3: #0d9488; /* ティール */
+  --pop-4: #c026d3; /* マゼンタ */
+  --pop-5: #15803d; /* グリーン */
+  --pop-6: #b45309; /* アンバー */
+  --game-bg:
+    radial-gradient(circle at 10% 0%, rgb(255 170 60 / 0.08), transparent 45%),
+    radial-gradient(circle at 95% 15%, rgb(190 90 255 / 0.06), transparent 45%),
+    var(--bg);
+
+  --radius: 12px;
+  --gap: 12px;
+  --pad: 16px;
+  --tap: 48px;      /* タップ領域の最小高さ */
+  --bar-h: calc(var(--tap) + 2 * var(--pad));
+  --max-w: 560px;
+
+  --sans: system-ui, -apple-system, 'Segoe UI', 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+
+  color-scheme: light dark;
+  font: 16px/1.5 var(--sans);
+  color: var(--text);
+  background: var(--bg);
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #131318;
+    --surface: #1e1e25;
+    --text: #ececf1;
+    --text-muted: #a09dab;
+    --border: #34333d;
+    --primary: #ececf1;
+    --primary-text: #131318;
+    --plus: #6ea2ff;
+    --minus: #ff6b70;
+    --focus: #6ea2ff;
+    --game-bg:
+      radial-gradient(circle at 10% 0%, rgb(255 140 40 / 0.07), transparent 45%),
+      radial-gradient(circle at 95% 15%, rgb(170 80 255 / 0.06), transparent 45%),
+      var(--bg);
+  }
+}
+
+/* ===== ベース ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-block-size: 100svh;
+}
+
+h2 {
+  margin: 0;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* ===== 画面 ===== */
+.screen {
+  max-inline-size: var(--max-w);
+  margin-inline: auto;
+  padding-inline: var(--pad);
+  padding-block: var(--pad) calc(var(--bar-h) + env(safe-area-inset-bottom) + var(--pad));
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.screen__title {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+/* ===== ボタン ===== */
+.btn {
+  min-block-size: 40px;
+  padding-inline: 14px;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  background: none;
+  cursor: pointer;
+  touch-action: manipulation; /* 連打時のダブルタップズームを防ぐ */
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn--primary {
+  background: var(--primary);
+  color: var(--primary-text);
+  font-weight: 700;
+}
+
+.btn--outline {
+  border-color: var(--border);
+  background: var(--surface);
+}
+
+.btn--ghost {
+  color: var(--text-muted);
+}
+
+.btn--block {
+  inline-size: 100%;
+}
+
+.btn--large {
+  min-block-size: var(--tap);
+  font-size: 1.0625rem;
+}
+
+.btn--primary:active:not(:disabled),
+.btn--outline:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+/* ===== 入力 ===== */
+.input {
+  min-block-size: var(--tap);
+  min-inline-size: 0;
+  padding-inline: 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  font-size: 1rem; /* 16px未満だとiOSで入力時にズームする */
+}
+
+.input--bet {
+  inline-size: 6.5em;
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap);
+}
+
+.field__label {
+  font-weight: 700;
+}
+
+/* ===== S1 セットアップ ===== */
+.player-list__head {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+.player-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.player-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: 8px;
+}
+
+.player-row__no {
+  min-inline-size: 1.5em;
+  color: var(--text-muted);
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.player-row__name {
+  inline-size: 100%;
+}
+
+.player-row__remove {
+  min-block-size: var(--tap);
+  padding-inline: 8px;
+}
+
+.player-row__losses {
+  grid-column: 2 / -1;
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+}
+
+/* ===== S2 ゲーム ===== */
+.game-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap);
+}
+
+.game-bar__total {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.menu {
+  position: relative;
+}
+
+.menu > summary {
+  display: inline-flex;
+  align-items: center;
+  list-style: none;
+}
+
+.menu > summary::-webkit-details-marker {
+  display: none;
+}
+
+.menu__list {
+  position: absolute;
+  inset-inline-end: 0;
+  inset-block-start: calc(100% + 4px);
+  z-index: 10;
+  min-inline-size: 12em;
+  padding: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.15);
+}
+
+.menu__list .btn {
+  inline-size: 100%;
+  min-block-size: var(--tap);
+  text-align: start;
+  color: var(--text);
+}
+
+.cards {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: var(--gap);
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.card__info {
+  flex: 1;
+  min-inline-size: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.card__name {
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card__losses,
+.card__net-label {
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+}
+
+.card__net {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 6px;
+}
+
+.net {
+  font-weight: 700;
+  font-size: 1.0625rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.net--plus {
+  color: var(--plus);
+}
+
+.net--minus {
+  color: var(--minus);
+}
+
+.card__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.card__minus {
+  min-block-size: var(--tap);
+  min-inline-size: 44px;
+  padding-inline: 8px;
+}
+
+.card__plus {
+  min-block-size: 56px; /* 48px以上 */
+  min-inline-size: 104px;
+  font-size: 1.0625rem;
+}
+
+/* ===== 画面下部の固定ボタン ===== */
+.action-bar {
+  position: fixed;
+  inset-inline: 0;
+  inset-block-end: 0;
+  z-index: 5;
+  padding: var(--pad);
+  padding-block-end: calc(var(--pad) + env(safe-area-inset-bottom));
+  border-block-start: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.action-bar > .btn {
+  display: block;
+  max-inline-size: calc(var(--max-w) - 2 * var(--pad));
+  margin-inline: auto;
+}
+
+/* ===== S1・S2 の彩り ===== */
+body:has(:is(.screen--setup, .screen--game)) {
+  background: var(--game-bg);
+}
+
+:is(.screen--setup, .screen--game) .screen__title {
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+/* 数字のバッジ（総ゲーム数・人数） */
+.screen--game .game-bar__total,
+.screen--setup .player-list__head > :last-child {
+  padding: 4px 14px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--pop-1) 14%, var(--surface));
+  color: var(--pop-1);
+  font-weight: 700;
+}
+
+/* PLAYERごとに色を順番に割り当てる（S1とS2で同じ色になる） */
+:is(.cards > .card, .player-list > .player-row):nth-child(6n + 1) { --accent: var(--pop-1); }
+:is(.cards > .card, .player-list > .player-row):nth-child(6n + 2) { --accent: var(--pop-2); }
+:is(.cards > .card, .player-list > .player-row):nth-child(6n + 3) { --accent: var(--pop-3); }
+:is(.cards > .card, .player-list > .player-row):nth-child(6n + 4) { --accent: var(--pop-4); }
+:is(.cards > .card, .player-list > .player-row):nth-child(6n + 5) { --accent: var(--pop-5); }
+:is(.cards > .card, .player-list > .player-row):nth-child(6n + 6) { --accent: var(--pop-6); }
+
+.screen--game .card,
+.screen--setup .player-row {
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--border));
+  border-inline-start: 6px solid var(--accent);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--accent) 7%, var(--surface));
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--accent) 16%, transparent);
+}
+
+/* --- S1 --- */
+.screen--setup .field {
+  padding: 10px 12px;
+  border: 1px solid color-mix(in srgb, var(--pop-1) 30%, var(--border));
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--pop-1) 8%, var(--surface));
+}
+
+.screen--setup .field__label {
+  color: var(--pop-1);
+}
+
+.screen--setup .player-row {
+  padding: 8px 10px 8px 8px;
+}
+
+.screen--setup .player-row__no {
+  display: grid;
+  place-items: center;
+  inline-size: 28px;
+  block-size: 28px;
+  min-inline-size: 0;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.screen--setup .player-row .input {
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+}
+
+.screen--setup .player-row .input:focus-visible {
+  outline-color: var(--accent);
+}
+
+.screen--setup .player-list + .btn--outline {
+  min-block-size: var(--tap);
+  border: 2px dashed color-mix(in srgb, var(--pop-1) 55%, var(--border));
+  background: color-mix(in srgb, var(--pop-1) 5%, var(--surface));
+  color: var(--pop-1);
+  font-weight: 700;
+}
+
+/* --- S2 --- */
+.screen--game .card__name {
+  color: var(--accent);
+}
+
+.screen--game .card__plus {
+  background: var(--accent);
+  color: #ffffff;
+  box-shadow: 0 4px 0 color-mix(in srgb, var(--accent) 60%, #000000);
+  transition: transform 0.08s, box-shadow 0.08s;
+}
+
+/* 押すと沈み込む */
+.screen--game .card__plus:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--accent) 60%, #000000);
+}
+
+.screen--game .card__minus {
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+  color: var(--accent);
+}
+
+/* --- 下部の固定ボタン --- */
+:is(.screen--setup, .screen--game) .action-bar {
+  border-block-start: 0;
+  background: color-mix(in srgb, var(--bg) 75%, transparent);
+  backdrop-filter: blur(8px);
+}
+
+:is(.screen--setup, .screen--game) .action-bar > .btn--primary {
+  background: var(--pop-1);
+  color: #ffffff;
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--pop-1) 30%, transparent);
+}
+
+@media (prefers-color-scheme: dark) {
+  .screen--game .card__name,
+  .screen--game .card__minus {
+    color: color-mix(in srgb, var(--accent) 65%, #ffffff);
+  }
+
+  .screen--setup .field__label,
+  .screen--setup .player-list + .btn--outline,
+  .screen--setup .player-list__head > :last-child,
+  .screen--game .game-bar__total {
+    color: color-mix(in srgb, var(--pop-1) 65%, #ffffff);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .screen--game .card__plus {
+    transition: none;
+  }
+}
