@@ -65,29 +65,55 @@ export default function Setup({ state, dispatch }: Props) {
     dispatch({ type: 'setView', view: 'game' });
   };
 
+  // 日本語以外は使い方ページの英語の節へ飛ばす（Footer と同じ）
+  const rulesHref = lang === 'ja' ? '/guide.html#rules' : '/guide.html#rules-en';
+  const buttons = { addLoss: t('game.addLoss'), settle: t('game.settle') };
+
   return (
     <main className="screen screen--setup">
+      {/* 初めて開いた人向けの概要。アプリ名のすぐ下に置く */}
+      <section className="intro" aria-label={t('setup.intro.label')}>
+        <p>{t('setup.intro.summary', buttons)}</p>
+        <ol className="intro__steps">
+          <li>{t('setup.intro.step1')}</li>
+          <li>{t('setup.intro.step2', buttons)}</li>
+          <li>{t('setup.intro.step3', buttons)}</li>
+        </ol>
+        <a className="intro__rules" href={rulesHref}>
+          {t('setup.intro.rules')}
+        </a>
+      </section>
+
       <h2 className="screen__title">{t('setup.title')}</h2>
 
-      <div className="field">
-        <label className="field__label" htmlFor="bet-all">
-          {t('setup.betAll')}
-        </label>
-        <BetInput
-          id="bet-all"
-          value={bulkBet}
-          onCommit={(bet) => {
-            setBulkBet(bet);
-            dispatch({ type: 'setAllBets', bet });
-          }}
-        />
+      <div className="hinted">
+        <p className="hint">{t('setup.betHint')}</p>
+        <p className="hint">{t('setup.betNote')}</p>
+        <div className="field">
+          <label className="field__label" htmlFor="bet-all">
+            {t('setup.betAll')}
+          </label>
+          <BetInput
+            id="bet-all"
+            value={bulkBet}
+            onCommit={(bet) => {
+              setBulkBet(bet);
+              dispatch({ type: 'setAllBets', bet });
+            }}
+          />
+        </div>
       </div>
 
-      <div className="player-list__head">
-        <span>{t('setup.players')}</span>
-        <span>
-          {t('setup.playerCount', { count: formatNumber(players.length, lang), max: formatNumber(MAX_PLAYERS, lang) })}
-        </span>
+      <div className="hinted">
+        <p className="hint">
+          {t('setup.playersHint', { min: formatNumber(MIN_PLAYERS, lang), max: formatNumber(MAX_PLAYERS, lang) })}
+        </p>
+        <div className="player-list__head">
+          <span>{t('setup.players')}</span>
+          <span>
+            {t('setup.playerCount', { count: formatNumber(players.length, lang), max: formatNumber(MAX_PLAYERS, lang) })}
+          </span>
+        </div>
       </div>
 
       <ol className="player-list">

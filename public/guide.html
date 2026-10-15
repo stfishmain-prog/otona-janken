@@ -60,18 +60,18 @@
 
       <section id="ja" lang="ja">
         <h1>使い方・ルール・FAQ</h1>
-        <p>「大人は目的無くジャンケンをしない。」は、ジャンケンなどのゲームで誰が何回負けたかを記録し、BET POINTをもとに各PLAYERの清算POINTを自動で計算するWebアプリです。最後に「誰が誰に何POINT渡せばよいか」を、できるだけ少ない受け渡し回数で表示します。登録不要・無料で、スマートフォンのブラウザからそのまま使えます。</p>
+        <p>「大人は目的無くジャンケンをしない。」は、ジャンケンなどのゲームで負けた回数により、POINT争奪戦を行うWebアプリです。BET POINTをもとに各PLAYERの清算POINTを自動で計算し、最後に「POINT清算」を押すと、誰が誰に何POINT渡せばよいかを、少ない受け渡し回数で表示します。登録不要・無料で、スマートフォンのブラウザからそのまま使えます。</p>
         <a class="cta" href="/">アプリを開く</a>
 
         <h2>使い方</h2>
         <ol>
-          <li><strong>SET UP</strong>：PLAYERの名前を入力します（2〜20人）。BET POINTは全員に100が入っていて、一括で変えることも、PLAYERごとに変えることもできます。名前を空のままにすると「PLAYER 1」のように自動で名前が付きます。</li>
-          <li><strong>PLAY GAME</strong>：ゲームのたびに、負けた人の「負け ＋1」を押します。押し間違えたら「元に戻す」で直前の操作を取り消せます。各PLAYERのカードには敗数と現在の清算POINTが常に表示されます。</li>
-          <li><strong>POINT清算</strong>：画面下の「POINT清算」を押すと、POINTの移動（誰→誰に何POINT）と、加点・減点・端数・清算POINTの内訳が表示されます。「結果をコピー」でメッセージアプリなどに貼り付けられます。</li>
+          <li><strong>SET UP</strong>：メンバーとBET POINTを決めます。参加する人の名前を入れてください（2〜20人）。名前を空のままにすると「PLAYER 1」のように自動で名前が付きます。BET POINTは1回負けるごとに減るPOINTで、負けた人のBET POINTが、ほかの全員に均等に配られます。全員に100が入っていて、一括で変えることも、PLAYERごとに変えてハンデを付けることもできます。人数が多いほど1回勝ったときの加点POINTが少なくなり、負けた分のPOINTを取り戻しにくくなるため、5〜6人くらいがおすすめです。</li>
+          <li><strong>PLAY GAME</strong>：ゲームのたびに、負けた人の「負け ＋1」を押します。間違えたら「元に戻す」で取り消せます。各PLAYERのカードには敗数と現在の清算POINTが常に表示されます。</li>
+          <li><strong>POINT清算</strong>：画面下の「POINT清算」を押すと、POINTの移動（誰が誰に何POINT渡せばよいか）が表示されます。この受け渡しをすれば、全員の清算が終わります。加点・減点・端数・清算POINTの内訳も表示され、「結果をコピー」でメッセージアプリなどに貼り付けられます。</li>
           <li><strong>続ける・やり直す</strong>：「ゲームに戻る」で敗数を残したまま続行できます。「NEW GAME」は敗数をすべて消して最初から始めます（確認が出ます）。</li>
         </ol>
 
-        <h2>POINTの計算ルール</h2>
+        <h2 id="rules">POINTの計算ルール</h2>
         <p>負けたPLAYERは、自分のBET POINT × 敗数 を失い（<strong>減点POINT</strong>）、その分を自分以外の全員で等分して受け取ります（<strong>加点POINT</strong>）。各PLAYERの最終的な損得が<strong>清算POINT</strong>で、全員の清算POINTを足すと必ず0になります。</p>
         <ul>
           <li>減点POINT ＝ BET POINT × 敗数 × −1</li>
@@ -115,7 +115,7 @@
           <dd>2人から20人までです。</dd>
 
           <dt>途中で人数やBET POINTを変えられますか？</dt>
-          <dd>はい。メニューの「SET UP」から変更できます。敗数の記録は残り、清算POINTは全履歴から計算し直されます。</dd>
+          <dd>はい。ゲーム画面の「SET UPに戻る」から変更できます。敗数の記録は残り、清算POINTは全履歴から計算し直されます。</dd>
 
           <dt>「負け ＋1」を押し間違えました。</dt>
           <dd>「元に戻す」で直前の操作を取り消せます。特定のPLAYERの負けを1つ減らす「取消」ボタンもあります。</dd>
@@ -133,18 +133,18 @@
 
       <section id="en" lang="en">
         <h1>How to use, rules and FAQ</h1>
-        <p>"Otona wa Mokuteki Naku Janken wo Shinai." is a web app that records who lost how many times in rock-paper-scissors or any other game, and calculates each player's net POINT from their BET POINT. At the end it shows who should give how many POINTs to whom, with as few transfers as possible. It is free, needs no sign-up, and runs right in your phone's browser.</p>
+        <p>"Otona wa Mokuteki Naku Janken wo Shinai." is a web app for a POINT battle based on how many times each player loses at rock-paper-scissors or any other game. It calculates each player's net POINT from their BET POINT, and at the end, "Settle POINT" shows who should give how many POINTs to whom, in as few transfers as possible. It is free, needs no sign-up, and runs right in your phone's browser.</p>
         <a class="cta" href="/">Open the app</a>
 
         <h2>How to use</h2>
         <ol>
-          <li><strong>SET UP</strong>: Enter the players' names (2 to 20 players). Every player starts with a BET POINT of 100, which you can change for everyone at once or for each player. Empty names are filled in automatically, such as "PLAYER 1".</li>
-          <li><strong>PLAY GAME</strong>: After each game, tap "Loss +1" for the player who lost. If you tap the wrong one, "Undo" reverts the last action. Each player's card always shows their losses and current net POINT.</li>
-          <li><strong>Settle POINT</strong>: Tap "Settle POINT" at the bottom to see the POINT transfers (who gives how many POINTs to whom) and the breakdown of gain, loss, remainder and net POINT. "Copy results" lets you paste them into a messaging app.</li>
+          <li><strong>SET UP</strong>: Choose the players and BET POINT. Enter the names of the players (2 to 20 people). Empty names are filled in automatically, such as "PLAYER 1". BET POINT is the POINTs lost each time a player loses; the loser's BET POINT is split equally among everyone else. Every player starts with 100, which you can change for everyone at once, or per player to give handicaps. The more players, the fewer POINTs each win earns and the harder it is to win back what you lost, so 5–6 players is recommended.</li>
+          <li><strong>PLAY GAME</strong>: After each game, tap "Loss +1" for the player who lost. Made a mistake? Tap "Undo" to take it back. Each player's card always shows their losses and current net POINT.</li>
+          <li><strong>Settle POINT</strong>: Tap "Settle POINT" at the bottom to see the POINT transfers (who should give how many POINTs to whom). Once these transfers are made, everyone is settled. The breakdown of gain, loss, remainder and net POINT is shown too, and "Copy results" lets you paste it all into a messaging app.</li>
           <li><strong>Continue or restart</strong>: "Back to game" continues with the losses kept. "NEW GAME" clears all losses and starts over (you will be asked to confirm).</li>
         </ol>
 
-        <h2>How POINTs are calculated</h2>
+        <h2 id="rules-en">How POINTs are calculated</h2>
         <p>A player who loses gives up their BET POINT × losses (<strong>Loss</strong>), which is split equally among all the other players (<strong>Gain</strong>). Each player's overall result is their <strong>Net POINT</strong>, and the Net POINTs of all players always add up to 0.</p>
         <ul>
           <li>Loss = BET POINT × losses × −1</li>
@@ -188,7 +188,7 @@
           <dd>From 2 to 20 players.</dd>
 
           <dt>Can I change the players or BET POINTs in the middle?</dt>
-          <dd>Yes, from "SET UP" in the menu. The loss records are kept, and the Net POINTs are recalculated from the full history.</dd>
+          <dd>Yes, tap "Back to SET UP" on the game screen. The loss records are kept, and the Net POINTs are recalculated from the full history.</dd>
 
           <dt>I tapped "Loss +1" by mistake.</dt>
           <dd>"Undo" reverts the last action. Each player also has an "Undo loss" button that removes one of their losses.</dd>
