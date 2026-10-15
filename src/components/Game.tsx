@@ -43,7 +43,9 @@ export default function Game({ state, dispatch }: Props) {
         </button>
       </div>
 
-      <p className="hint">{t('game.hint', { addLoss: t('game.addLoss'), undo: t('game.undo') })}</p>
+      <p className="hint">
+        {t('game.hint', { addLoss: t('game.addLoss'), undo: t('game.undo'), backToSetup: t('game.backToSetup') })}
+      </p>
 
       <ul className="cards">
         {results.map((r, i) => {
