@@ -26,14 +26,9 @@ export default function Game({ state, dispatch }: Props) {
     <main className="screen screen--game">
       <div className="game-bar">
         <h2 className="screen__title">{t('game.title')}</h2>
-        <details className="menu">
-          <summary className="btn btn--ghost">{t('game.menu')}</summary>
-          <div className="menu__list">
-            <button type="button" className="btn btn--ghost" onClick={() => dispatch({ type: 'setView', view: 'setup' })}>
-              {t('game.editMembers')}
-            </button>
-          </div>
-        </details>
+        <button type="button" className="btn btn--outline" onClick={() => dispatch({ type: 'setView', view: 'setup' })}>
+          {t('game.backToSetup')}
+        </button>
       </div>
 
       <div className="game-bar">
@@ -47,6 +42,8 @@ export default function Game({ state, dispatch }: Props) {
           {t('game.undo')}
         </button>
       </div>
+
+      <p className="hint">{t('game.hint', { addLoss: t('game.addLoss'), undo: t('game.undo') })}</p>
 
       <ul className="cards">
         {results.map((r, i) => {

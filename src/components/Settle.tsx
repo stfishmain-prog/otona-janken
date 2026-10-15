@@ -73,6 +73,7 @@ export default function Settle({ state, dispatch }: Props) {
         <h3 id="settle-transfers" className="settle-section__title">
           {t('settle.transfers')}
         </h3>
+        {transfers.length > 0 && <p className="hint">{t('settle.transfersHint')}</p>}
         {transfers.length > 0 ? (
           <ol className="transfers">
             {transfers.map((tr, i) => (
